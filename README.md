@@ -7,8 +7,8 @@ A clean, minimalist Pinterest-style image menu designed to showcase festival des
 - **Two Distinct Themes**:
   - **Face Paint**: Spooky Halloween theme (Creepster typography, dark violet background with toxic & pumpkin neon glows).
   - **Mehendi**: Royal Festive Henna theme (Cinzel serif typography, warm terracotta and glowing gold tones).
-- **Design Numbers & Fast Search**: Every design has a simple round number badge (`#1`, `#2`, `#3`...) on the card and at the top of the full-screen view (without covering the image). Search bar allows visitors to find any design number instantly.
-- **Lightbox with Mobile Zoom**: Click/tap any design to view in full resolution with pinch-to-zoom, pan, double-tap zoom, and on-screen zoom buttons.
+- **Design Numbers & Fast Search**: Every design has a simple round number badge (`#1`, `#2`, `#3`...) on the card and in the modal header. Search bar allows visitors to find any design number instantly.
+- **Lightbox & True "Only Image" Fullscreen Mode**: Click/tap any design to view details with zoom controls. Tap the **Fullscreen Button** to enter pure full-screen mode where all toolbars, badges, and controls are hidden, leaving **only the image** filling the entire screen edge-to-edge.
 - **GitHub Pages Ready**: Pure static HTML/CSS/JS with zero dependencies. Works directly from GitHub Pages or locally.
 
 ---
