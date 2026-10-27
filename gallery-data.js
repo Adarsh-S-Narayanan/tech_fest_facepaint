@@ -32,7 +32,6 @@ const GALLERY_IMAGES = {
                       "WhatsApp Image 2026-10-27 at 8.50.41 PM.jpeg",
                       "WhatsApp Image 2026-10-27 at 9.19.42 PM (1).jpeg",
                       "WhatsApp Image 2026-10-27 at 9.19.42 PM.jpeg",
-                      "WhatsApp Image 2026-10-27 at 9.19.43 PM (1).jpeg",
                       "WhatsApp Image 2026-10-27 at 9.19.43 PM (2).jpeg",
                       "WhatsApp Image 2026-10-27 at 9.19.43 PM.jpeg"
                   ],
