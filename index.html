@@ -278,12 +278,18 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.3);
       animation: fadeInPin 0.35s ease forwards;
       touch-action: manipulation;
+      min-height: 200px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
     @media (min-width: 600px) {
       .pin-card {
         margin-bottom: 14px;
         border-radius: var(--radius);
+        min-height: 240px;
       }
+    }
+    .pin-card.is-loaded {
+      min-height: 0;
     }
 
     @keyframes fadeInPin {
@@ -301,12 +307,88 @@
       }
     }
 
+    /* Skeleton Grey Placeholder for Images */
+    .pin-skeleton {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      background: #20222a;
+      background: linear-gradient(
+        90deg,
+        #1d1f27 0%,
+        #2a2c37 35%,
+        #383b4a 50%,
+        #2a2c37 65%,
+        #1d1f27 100%
+      );
+      background-size: 250% 100%;
+      animation: skeletonShimmer 1.5s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    @media (min-width: 600px) {
+      .pin-skeleton {
+        min-height: 240px;
+      }
+    }
+    body.theme-mehendi .pin-skeleton {
+      background: #231c19;
+      background: linear-gradient(
+        90deg,
+        #1f1815 0%,
+        #30241e 35%,
+        #44332b 50%,
+        #30241e 65%,
+        #1f1815 100%
+      );
+      background-size: 250% 100%;
+    }
+
+    @keyframes skeletonShimmer {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
     .pin-card img {
       width: 100%;
       height: auto;
       display: block;
-      background: rgba(255, 255, 255, 0.03);
+      background: transparent;
       content-visibility: auto;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .pin-card img.is-loaded {
+      opacity: 1;
+    }
+
+    .pin-card.has-error {
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(30, 20, 20, 0.6);
+    }
+    .pin-error-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 30px 14px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+      z-index: 3;
     }
 
     /* Round ID Badge in Preview Card */
@@ -529,6 +611,7 @@
     .modal-img-container {
       position: relative;
       width: 100%;
+      min-height: 280px;
       max-height: 75vh;
       max-height: 75dvh;
       display: flex;
@@ -542,6 +625,39 @@
       touch-action: none;
       user-select: none;
       -webkit-user-select: none;
+      transition: background 0.3s ease;
+    }
+    @media (min-width: 600px) {
+      .modal-img-container {
+        min-height: 380px;
+      }
+    }
+
+    /* Modal Skeleton Grey Loading State */
+    .modal-img-container.is-loading {
+      background: #1e2027;
+      background: linear-gradient(
+        90deg,
+        #1b1c23 0%,
+        #282a35 35%,
+        #353847 50%,
+        #282a35 65%,
+        #1b1c23 100%
+      );
+      background-size: 250% 100%;
+      animation: skeletonShimmer 1.5s ease-in-out infinite;
+    }
+    body.theme-mehendi .modal-img-container.is-loading {
+      background: #211a17;
+      background: linear-gradient(
+        90deg,
+        #1d1714 0%,
+        #2e221d 35%,
+        #3f2e27 50%,
+        #2e221d 65%,
+        #1d1714 100%
+      );
+      background-size: 250% 100%;
     }
 
     .modal-img-container img {
@@ -555,6 +671,140 @@
       will-change: transform;
       display: block;
       pointer-events: auto;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .modal-img-container img.is-loaded {
+      opacity: 1;
+    }
+
+    /* ========================================================
+       POPUP SPINNER WITH DOTS
+       ======================================================== */
+    .modal-spinner-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 20px 28px;
+      background: rgba(14, 8, 22, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), var(--shadow-glow);
+      z-index: 30;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    body.theme-mehendi .modal-spinner-wrapper {
+      background: rgba(26, 13, 8, 0.88);
+    }
+    .modal-spinner-wrapper.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* 8-dot circular spinning indicator */
+    .dots-spinner {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      animation: dotsSpin 1.15s linear infinite;
+    }
+    .dots-spinner .dot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .dots-spinner .dot::before {
+      content: '';
+      display: block;
+      margin: 0 auto;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-primary), 0 0 4px #fff;
+      animation: dotPulse 1.15s ease-in-out infinite;
+    }
+
+    .dots-spinner .dot:nth-child(1) { transform: rotate(0deg); }
+    .dots-spinner .dot:nth-child(1)::before { animation-delay: -1.006s; }
+    .dots-spinner .dot:nth-child(2) { transform: rotate(45deg); }
+    .dots-spinner .dot:nth-child(2)::before { animation-delay: -0.8625s; }
+    .dots-spinner .dot:nth-child(3) { transform: rotate(90deg); }
+    .dots-spinner .dot:nth-child(3)::before { animation-delay: -0.7187s; }
+    .dots-spinner .dot:nth-child(4) { transform: rotate(135deg); }
+    .dots-spinner .dot:nth-child(4)::before { animation-delay: -0.575s; }
+    .dots-spinner .dot:nth-child(5) { transform: rotate(180deg); }
+    .dots-spinner .dot:nth-child(5)::before { animation-delay: -0.4312s; }
+    .dots-spinner .dot:nth-child(6) { transform: rotate(225deg); }
+    .dots-spinner .dot:nth-child(6)::before { animation-delay: -0.2875s; }
+    .dots-spinner .dot:nth-child(7) { transform: rotate(270deg); }
+    .dots-spinner .dot:nth-child(7)::before { animation-delay: -0.1437s; }
+    .dots-spinner .dot:nth-child(8) { transform: rotate(315deg); }
+    .dots-spinner .dot:nth-child(8)::before { animation-delay: 0s; }
+
+    @keyframes dotsSpin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dotPulse {
+      0%, 100% {
+        transform: scale(0.5);
+        opacity: 0.22;
+      }
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
+    }
+
+    /* Subtitle with pulsing text dots */
+    .spinner-dots-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+      user-select: none;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+    }
+    .spinner-dots-label .pulse-dot {
+      display: inline-block;
+      color: var(--accent-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      line-height: 0.8;
+    }
+    .spinner-dots-label .pulse-dot:nth-child(1) { animation: textDotBlink 1.4s infinite 0.0s; }
+    .spinner-dots-label .pulse-dot:nth-child(2) { animation: textDotBlink 1.4s infinite 0.25s; }
+    .spinner-dots-label .pulse-dot:nth-child(3) { animation: textDotBlink 1.4s infinite 0.5s; }
+
+    @keyframes textDotBlink {
+      0%, 20% { opacity: 0.15; transform: translateY(0); }
+      40% { opacity: 1; transform: translateY(-2px); }
+      60%, 100% { opacity: 0.15; transform: translateY(0); }
+    }
+
+    body.is-fullscreen-view .modal-spinner-wrapper {
+      z-index: 100010;
     }
 
     /* Modal Zoom Controls Toolbar */
@@ -753,7 +1003,7 @@
     <div class="tabs-container">
       <div class="tabs-wrapper">
         <button class="tab-btn active" id="tabFacePaint" onclick="switchCategory('facePaint')">
-          <span class="tab-icon">💀</span>
+          <span class="tab-icon">🎨</span>
           <span>Face Paint</span>
         </button>
         <button class="tab-btn" id="tabMehendi" onclick="switchCategory('mehendi')">
@@ -800,6 +1050,21 @@
       
       <!-- Image Container -->
       <div class="modal-img-container" id="modalImgContainer">
+        <!-- Spinning Indicator with Dots -->
+        <div class="modal-spinner-wrapper" id="modalSpinner" aria-label="Loading design image..." role="status">
+          <div class="dots-spinner">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="spinner-dots-label">Loading design<span class="pulse-dot">.</span><span class="pulse-dot">.</span><span class="pulse-dot">.</span></div>
+        </div>
+
         <img id="modalImg" src="" alt="Design view" draggable="false">
       </div>
 
@@ -951,12 +1216,61 @@
       grid.innerHTML = filteredList.map(item => {
         const encodedSrc = `${encodeURIComponent(folderName)}/${encodeURIComponent(item.fileName)}`;
         return `
-          <div class="pin-card" onclick="openModal('${encodedSrc}', ${item.id}, '${currentCategory}')" role="button" tabindex="0" aria-label="View design #${item.id}">
+          <div class="pin-card is-loading" onclick="openModal('${encodedSrc}', ${item.id}, '${currentCategory}')" role="button" tabindex="0" aria-label="View design #${item.id}">
+            <div class="pin-skeleton" aria-hidden="true"></div>
             <div class="pin-id-badge" aria-label="Design #${item.id}">#${item.id}</div>
-            <img src="${encodedSrc}" alt="Design #${item.id}" loading="lazy">
+            <img src="${encodedSrc}" alt="Design #${item.id}" loading="lazy" onload="handleImageLoaded(this)" onerror="handleImageError(this)">
           </div>
         `;
       }).join('');
+
+      // Check any images already cached by browser
+      grid.querySelectorAll('img').forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+          handleImageLoaded(img);
+        }
+      });
+    }
+
+    function handleImageLoaded(img) {
+      if (!img) return;
+      img.classList.add('is-loaded');
+      const card = img.closest('.pin-card');
+      if (card) {
+        card.classList.remove('is-loading');
+        card.classList.add('is-loaded');
+        const skeleton = card.querySelector('.pin-skeleton');
+        if (skeleton) {
+          skeleton.style.opacity = '0';
+          setTimeout(() => {
+            if (skeleton.parentElement) skeleton.remove();
+          }, 350);
+        }
+      }
+    }
+
+    function handleImageError(img) {
+      if (!img) return;
+      const card = img.closest('.pin-card');
+      if (card) {
+        card.classList.remove('is-loading');
+        card.classList.add('has-error');
+        const skeleton = card.querySelector('.pin-skeleton');
+        if (skeleton) skeleton.remove();
+        if (!card.querySelector('.pin-error-placeholder')) {
+          const errDiv = document.createElement('div');
+          errDiv.className = 'pin-error-placeholder';
+          errDiv.innerHTML = `
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span>Failed to load</span>
+          `;
+          card.appendChild(errDiv);
+        }
+      }
     }
 
     // ==========================================
@@ -1008,18 +1322,47 @@
     }
 
     function openModal(src, idNumber, category) {
+      const modal = document.getElementById('imageModal');
+      const container = document.getElementById('modalImgContainer');
       const img = document.getElementById('modalImg');
+      const spinner = document.getElementById('modalSpinner');
       const idNumEl = document.getElementById('modalIdNumber');
       const idLabelEl = document.getElementById('modalIdLabel');
 
-      img.src = src;
       if (idNumEl) idNumEl.innerText = idNumber != null ? `#${idNumber}` : '';
       if (idLabelEl) idLabelEl.innerText = category === 'facePaint' ? 'Face Paint' : 'Mehendi';
 
-      document.getElementById('imageModal').classList.add('open');
+      // Set popup to skeleton grey loading state + active spinning indicator with dots
+      container.classList.add('is-loading');
+      if (spinner) spinner.classList.add('active');
+      img.classList.remove('is-loaded');
+      img.style.opacity = '0';
+
+      modal.classList.add('open');
       document.body.style.overflow = 'hidden';
       resetZoom(false);
       updateFullscreenIcons(false);
+
+      const onFinish = () => {
+        container.classList.remove('is-loading');
+        if (spinner) spinner.classList.remove('active');
+        img.classList.add('is-loaded');
+        img.style.opacity = '1';
+      };
+
+      img.onload = onFinish;
+      img.onerror = () => {
+        container.classList.remove('is-loading');
+        if (spinner) spinner.classList.remove('active');
+        img.classList.add('is-loaded');
+        img.style.opacity = '1';
+      };
+
+      img.src = src;
+
+      if (img.complete && img.naturalWidth > 0) {
+        onFinish();
+      }
     }
 
     function isFullscreenActive() {
@@ -1080,10 +1423,18 @@
     }
 
     function closeModal() {
-      document.getElementById('imageModal').classList.remove('open');
+      const modal = document.getElementById('imageModal');
+      const container = document.getElementById('modalImgContainer');
+      const spinner = document.getElementById('modalSpinner');
+
+      modal.classList.remove('open');
       document.body.style.overflow = '';
       resetZoom(false);
       exitFullscreenIfActive();
+
+      // Reset loading indicators so next popup open starts clean
+      if (container) container.classList.remove('is-loading');
+      if (spinner) spinner.classList.remove('active');
     }
 
     function closeModalOnBackdrop(e) {
