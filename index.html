@@ -246,13 +246,14 @@
     }
 
     .pinterest-grid {
-      column-count: 2;
-      column-gap: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      width: 100%;
     }
     @media (min-width: 600px) {
       .pinterest-grid {
-        column-count: 3;
-        column-gap: 14px;
+        gap: 14px;
       }
       main {
         padding: 1rem 1.25rem 4rem;
@@ -260,15 +261,33 @@
     }
     @media (min-width: 1024px) {
       .pinterest-grid {
-        column-count: 4;
-        column-gap: 18px;
+        gap: 18px;
+      }
+    }
+
+    /* Masonry Column Container */
+    .masonry-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    @media (min-width: 600px) {
+      .masonry-col {
+        gap: 14px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .masonry-col {
+        gap: 18px;
       }
     }
 
     /* Image Pin Card */
     .pin-card {
-      break-inside: avoid;
-      margin-bottom: 10px;
+      margin-bottom: 0;
+      width: 100%;
       border-radius: 12px;
       overflow: hidden;
       background: var(--bg-card);
@@ -283,7 +302,6 @@
     }
     @media (min-width: 600px) {
       .pin-card {
-        margin-bottom: 14px;
         border-radius: var(--radius);
         min-height: 240px;
       }
@@ -424,7 +442,7 @@
 
     /* Search Empty State */
     .search-empty-state {
-      grid-column: 1 / -1;
+      width: 100%;
       text-align: center;
       padding: 3.5rem 1rem;
       color: var(--text-muted);
@@ -1159,6 +1177,12 @@
       renderGallery();
     }
 
+    function getColumnCount() {
+      if (window.innerWidth >= 1024) return 4;
+      if (window.innerWidth >= 600) return 3;
+      return 2;
+    }
+
     function renderGallery() {
       const grid = document.getElementById('galleryGrid');
       const folderName = currentCategory === 'facePaint' ? 'face paint' : 'mehendi';
@@ -1213,15 +1237,26 @@
         return;
       }
 
-      grid.innerHTML = filteredList.map(item => {
-        const encodedSrc = `${encodeURIComponent(folderName)}/${encodeURIComponent(item.fileName)}`;
-        return `
-          <div class="pin-card is-loading" onclick="openModal('${encodedSrc}', ${item.id}, '${currentCategory}')" role="button" tabindex="0" aria-label="View design #${item.id}">
-            <div class="pin-skeleton" aria-hidden="true"></div>
-            <div class="pin-id-badge" aria-label="Design #${item.id}">#${item.id}</div>
-            <img src="${encodedSrc}" alt="Design #${item.id}" loading="lazy" onload="handleImageLoaded(this)" onerror="handleImageError(this)">
-          </div>
-        `;
+      const numCols = getColumnCount();
+      const cols = Array.from({ length: numCols }, () => []);
+
+      filteredList.forEach((item, index) => {
+        cols[index % numCols].push(item);
+      });
+
+      grid.innerHTML = cols.map(columnItems => {
+        const cardsHtml = columnItems.map(item => {
+          const encodedSrc = `${encodeURIComponent(folderName)}/${encodeURIComponent(item.fileName)}`;
+          return `
+            <div class="pin-card is-loading" onclick="openModal('${encodedSrc}', ${item.id}, '${currentCategory}')" role="button" tabindex="0" aria-label="View design #${item.id}">
+              <div class="pin-skeleton" aria-hidden="true"></div>
+              <div class="pin-id-badge" aria-label="Design #${item.id}">#${item.id}</div>
+              <img src="${encodedSrc}" alt="Design #${item.id}" loading="lazy" onload="handleImageLoaded(this)" onerror="handleImageError(this)">
+            </div>
+          `;
+        }).join('');
+
+        return `<div class="masonry-col">${cardsHtml}</div>`;
       }).join('');
 
       // Check any images already cached by browser
@@ -1562,6 +1597,19 @@
           closeModal();
         }
       }
+    });
+
+    let currentCols = getColumnCount();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const newCols = getColumnCount();
+        if (newCols !== currentCols) {
+          currentCols = newCols;
+          renderGallery();
+        }
+      }, 150);
     });
 
     window.addEventListener('DOMContentLoaded', () => {
