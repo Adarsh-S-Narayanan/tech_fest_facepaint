@@ -246,15 +246,13 @@
     }
 
     .pinterest-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      align-items: start;
+      column-count: 2;
+      column-gap: 10px;
     }
     @media (min-width: 600px) {
       .pinterest-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
+        column-count: 3;
+        column-gap: 14px;
       }
       main {
         padding: 1rem 1.25rem 4rem;
@@ -262,14 +260,15 @@
     }
     @media (min-width: 1024px) {
       .pinterest-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
+        column-count: 4;
+        column-gap: 18px;
       }
     }
 
     /* Image Pin Card */
     .pin-card {
-      margin-bottom: 0;
+      break-inside: avoid;
+      margin-bottom: 10px;
       border-radius: 12px;
       overflow: hidden;
       background: var(--bg-card);
@@ -284,6 +283,7 @@
     }
     @media (min-width: 600px) {
       .pin-card {
+        margin-bottom: 14px;
         border-radius: var(--radius);
         min-height: 240px;
       }
