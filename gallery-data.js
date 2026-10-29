@@ -121,10 +121,7 @@ window.GALLERY_IMAGES = {
                     "WhatsApp Image 2026-10-29 at 9.29.37 PM.jpeg",
                     "WhatsApp Image 2026-10-29 at 9.29.38 PM.jpeg",
                     "WhatsApp Image 2026-10-29 at 9.37.35 PM.jpeg",
-                    "WhatsApp Image 2026-10-29 at 9.48.56 PM (1).jpeg",
-                    "WhatsApp Image 2026-10-29 at 9.48.56 PM.jpeg",
-                    "WhatsApp Image 2026-10-29 at 9.48.57 PM (1).jpeg",
-                    "WhatsApp Image 2026-10-29 at 9.48.57 PM.jpeg"
+                    "WhatsApp Image 2026-10-29 at 9.48.56 PM.jpeg"
                 ]
 };
 var GALLERY_IMAGES = window.GALLERY_IMAGES;
