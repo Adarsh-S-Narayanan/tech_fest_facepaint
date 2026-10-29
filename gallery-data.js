@@ -1,5 +1,5 @@
 ﻿// Auto-generated gallery images list
-const GALLERY_IMAGES = {
+window.GALLERY_IMAGES = {
     "facePaint":  [
                       "WhatsApp Image 2026-10-27 at 7.06.04 PM (1).jpeg",
                       "WhatsApp Image 2026-10-27 at 7.06.04 PM (2).jpeg",
@@ -24,7 +24,6 @@ const GALLERY_IMAGES = {
                       "WhatsApp Image 2026-10-27 at 8.39.34 PM (1).jpeg",
                       "WhatsApp Image 2026-10-27 at 8.39.34 PM (2).jpeg",
                       "WhatsApp Image 2026-10-27 at 8.39.34 PM.jpeg",
-                      "WhatsApp Image 2026-10-27 at 8.39.35 PM.jpeg",
                       "WhatsApp Image 2026-10-27 at 8.41.53 PM.jpeg",
                       "WhatsApp Image 2026-10-27 at 8.41.54 PM.jpeg",
                       "WhatsApp Image 2026-10-27 at 8.50.40 PM (1).jpeg",
@@ -33,7 +32,54 @@ const GALLERY_IMAGES = {
                       "WhatsApp Image 2026-10-27 at 9.19.42 PM (1).jpeg",
                       "WhatsApp Image 2026-10-27 at 9.19.42 PM.jpeg",
                       "WhatsApp Image 2026-10-27 at 9.19.43 PM (2).jpeg",
-                      "WhatsApp Image 2026-10-27 at 9.19.43 PM.jpeg"
+                      "WhatsApp Image 2026-10-27 at 9.19.43 PM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.34 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.35 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.36 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.37 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.38 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.39 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.40 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.41 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.41 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.43 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.44 AM (2).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.44 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.45 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.45 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.46 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.47 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.47 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.49 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.49 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.50 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.50 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.51 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.51 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.52 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.52 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.53 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.54 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.54 AM (2).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.54 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.55 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.55 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.56 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.56 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.20.57 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.27 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.28 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.29 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.29 AM (2).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.29 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.30 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.30 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.31 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.31 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.32 AM (1).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.32 AM (2).jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.32 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 11.29.33 AM.jpeg"
                   ],
     "mehendi":  [
                     "WhatsApp Image 2026-10-27 at 7.24.32 PM (1).jpeg",
@@ -51,7 +97,13 @@ const GALLERY_IMAGES = {
                     "WhatsApp Image 2026-10-27 at 7.46.44 PM (1).jpeg",
                     "WhatsApp Image 2026-10-27 at 7.46.44 PM (2).jpeg",
                     "WhatsApp Image 2026-10-27 at 7.46.44 PM.jpeg",
-                    "WhatsApp Image 2026-10-27 at 7.46.45 PM.jpeg"
+                    "WhatsApp Image 2026-10-27 at 7.46.45 PM.jpeg",
+                    "WhatsApp Image 2026-10-28 at 8.08.14 PM.jpeg",
+                    "WhatsApp Image 2026-10-28 at 8.08.15 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.32.40 PM (1).jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.32.40 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.32.41 PM.jpeg"
                 ]
 };
+var GALLERY_IMAGES = window.GALLERY_IMAGES;
 

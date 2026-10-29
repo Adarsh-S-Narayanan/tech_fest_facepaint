@@ -173,31 +173,44 @@
       background: rgba(255, 255, 255, 0.25);
     }
 
-    /* Sticky, Mobile-Friendly Category Switch Tabs */
+    /* Floating Bottom Dock Navigation */
     .tabs-container {
-      position: sticky;
-      top: 10px;
-      z-index: 100;
+      position: fixed;
+      bottom: max(18px, env(safe-area-inset-bottom, 18px));
+      left: 0;
+      right: 0;
+      z-index: 900;
       display: flex;
       justify-content: center;
-      padding: 0 0.5rem;
-      margin-bottom: 0.5rem;
+      padding: 0 1rem;
+      pointer-events: none;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease;
+    }
+
+    /* Hide dock when popup modal or fullscreen is active */
+    .modal-backdrop.open ~ .tabs-container,
+    body.is-fullscreen-view .tabs-container {
+      display: none !important;
     }
 
     .tabs-wrapper {
+      pointer-events: auto;
       display: flex;
+      align-items: center;
       width: 100%;
-      max-width: 380px;
+      max-width: 320px;
       background: rgba(16, 9, 27, 0.88);
-      border: 1px solid var(--card-border);
+      border: 1.5px solid var(--card-border);
       border-radius: 999px;
       padding: 4px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(255, 107, 26, 0.25);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     body.theme-mehendi .tabs-wrapper {
-      background: rgba(30, 15, 10, 0.9);
+      background: rgba(28, 14, 10, 0.9);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(245, 158, 11, 0.28);
     }
 
     .tab-btn {
@@ -206,29 +219,29 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 16px;
-      min-height: 48px;
+      padding: 10px 16px;
+      min-height: 46px;
       border: none;
       border-radius: 999px;
       background: transparent;
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
       cursor: pointer;
       user-select: none;
-      transition: all 0.25s ease;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
       white-space: nowrap;
     }
     .tab-btn:active {
-      transform: scale(0.97);
+      transform: scale(0.95);
     }
     .tab-btn.active {
       color: #fff;
       background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
-      box-shadow: 0 4px 16px rgba(255, 107, 26, 0.4);
+      box-shadow: 0 4px 16px rgba(255, 107, 26, 0.45);
     }
     body.theme-mehendi .tab-btn.active {
-      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.45);
     }
 
     .tab-icon {
@@ -242,7 +255,7 @@
       z-index: 10;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0.75rem 0.75rem 4rem;
+      padding: 0.75rem 0.75rem calc(5.5rem + env(safe-area-inset-bottom, 20px));
     }
 
     .pinterest-grid {
@@ -256,7 +269,7 @@
         gap: 14px;
       }
       main {
-        padding: 1rem 1.25rem 4rem;
+        padding: 1rem 1.25rem calc(6rem + env(safe-area-inset-bottom, 20px));
       }
     }
     @media (min-width: 1024px) {
@@ -439,6 +452,56 @@
       background: rgba(22, 10, 6, 0.85);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(245, 158, 11, 0.35);
     }
+    /* Price Tag Badge on Gallery Cards */
+    .pin-price-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      padding: 5px 13px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+      border: none;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 107, 26, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 4;
+      pointer-events: none;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    body.theme-mehendi .pin-price-badge {
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), 0 0 12px rgba(245, 158, 11, 0.45);
+    }
+
+    /* Price display in modal header */
+    .modal-price-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: 0.4px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.5), var(--shadow-glow);
+      white-space: nowrap;
+    }
+    body.theme-mehendi .modal-price-tag {
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.5), 0 0 16px rgba(245, 158, 11, 0.35);
+    }
+    .modal-price-tag.hidden {
+      display: none;
+    }
 
     /* Search Empty State */
     .search-empty-state {
@@ -525,6 +588,7 @@
       z-index: 1010;
       padding: 0 4px;
     }
+    
 
     .modal-id-badge {
       display: inline-flex;
@@ -827,18 +891,7 @@
 
     /* Modal Zoom Controls Toolbar */
     .modal-zoom-controls {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 10px;
-      padding: 4px 8px;
-      background: rgba(18, 11, 28, 0.88);
-      border: 1px solid var(--card-border);
-      border-radius: 999px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 1020;
+      display: none !important;
     }
     body.theme-mehendi .modal-zoom-controls {
       background: rgba(28, 14, 10, 0.88);
@@ -878,12 +931,7 @@
     }
 
     .modal-tap-dismiss-tip {
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: rgba(255, 255, 255, 0.6);
-      text-align: center;
-      user-select: none;
-      letter-spacing: 0.5px;
+      display: none !important;
     }
 
     /* ========================================================
@@ -991,11 +1039,66 @@
       position: relative;
       z-index: 10;
       text-align: center;
-      padding: 1.75rem 1rem calc(1.75rem + env(safe-area-inset-bottom));
+      padding: 1.75rem 1rem calc(5.5rem + env(safe-area-inset-bottom, 20px));
       color: var(--text-muted);
       font-size: 0.8rem;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
+  
+    /* Top and Bottom modal bars */
+    .modal-header-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      z-index: 1010;
+      padding: 0 2px;
+    }
+
+    .modal-top-fullscreen-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      min-height: 42px;
+      border-radius: 999px;
+      background: rgba(18, 11, 28, 0.92);
+      border: 1.5px solid var(--accent-primary);
+      color: var(--text-main);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.5), 0 0 10px rgba(255, 107, 26, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.18s ease;
+      letter-spacing: 0.3px;
+    }
+    body.theme-mehendi .modal-top-fullscreen-btn {
+      background: rgba(28, 14, 10, 0.92);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.5), 0 0 10px rgba(245, 158, 11, 0.25);
+    }
+    .modal-top-fullscreen-btn:active {
+      transform: scale(0.96);
+      background: var(--accent-primary);
+      color: #000;
+    }
+
+    .modal-bottom-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding: 0 2px;
+      gap: 12px;
+      z-index: 1010;
+    }
+    body.is-fullscreen-view .modal-bottom-bar {
+      display: none !important;
+    }
+    
   </style>
 </head>
 <body>
@@ -1016,20 +1119,6 @@
         <button class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()" aria-label="Clear search">&times;</button>
       </div>
     </div>
-
-    <!-- Category Tabs -->
-    <div class="tabs-container">
-      <div class="tabs-wrapper">
-        <button class="tab-btn active" id="tabFacePaint" onclick="switchCategory('facePaint')">
-          <span class="tab-icon">🎭</span>
-          <span>Face Paint</span>
-        </button>
-        <button class="tab-btn" id="tabMehendi" onclick="switchCategory('mehendi')">
-          <span class="tab-icon">✨</span>
-          <span>Mehendi</span>
-        </button>
-      </div>
-    </div>
   </header>
 
   <!-- Pinterest Grid -->
@@ -1042,30 +1131,22 @@
   <!-- Lightbox Modal & True Fullscreen Viewer -->
   <div class="modal-backdrop" id="imageModal" onclick="closeModalOnBackdrop(event)">
     
-    <!-- Floating button visible ONLY during pure Fullscreen mode -->
+    <!-- Floating ✕ visible ONLY in native fullscreen mode -->
     <button class="fullscreen-exit-btn" id="fullscreenExitBtn" onclick="toggleFullscreen(event)" aria-label="Exit full screen view" title="Exit full screen">&times;</button>
 
     <div class="modal-content">
-      <!-- Top Bar: Round ID Badge, Fullscreen Toggle Button & Close Button -->
+
+      <!-- TOP BAR: Fullscreen + Close -->
       <div class="modal-header-bar">
-        <div class="modal-id-badge" id="modalIdBadge">
-          <span class="modal-id-number" id="modalIdNumber">#1</span>
-          <span class="modal-id-label" id="modalIdLabel">Face Paint</span>
-        </div>
-        <div class="modal-header-actions">
-          <!-- The Fullscreen Button -->
-          <button class="modal-fullscreen-btn" id="modalFullscreenBtn" onclick="toggleFullscreen(event)" aria-label="Full screen image" title="Only make image full screen">
-            <svg class="fs-icon-enter" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-            </svg>
-            <svg class="fs-icon-exit" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-              <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
-            </svg>
-          </button>
-          <button class="modal-close-btn" onclick="closeModal()" aria-label="Close dialog">&times;</button>
-        </div>
+        <button class="modal-top-fullscreen-btn" id="modalFullscreenBtn" onclick="toggleFullscreen(event)" aria-label="Full screen image" title="Only make image full screen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+          <span>Full Screen</span>
+        </button>
+        <button class="modal-close-btn" onclick="closeModal()" aria-label="Close dialog" title="Close preview">&times;</button>
       </div>
-      
+
       <!-- Image Container -->
       <div class="modal-img-container" id="modalImgContainer">
         <!-- Spinning Indicator with Dots -->
@@ -1086,50 +1167,100 @@
         <img id="modalImg" src="" alt="Design view" draggable="false">
       </div>
 
-      <!-- Zoom Controls Toolbar -->
-      <div class="modal-zoom-controls" onclick="event.stopPropagation()">
-        <button class="zoom-btn" onclick="zoomOut()" aria-label="Zoom out" title="Zoom out">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        </button>
-        <span class="zoom-level-indicator" id="zoomLevelIndicator">100%</span>
-        <button class="zoom-btn" onclick="zoomIn()" aria-label="Zoom in" title="Zoom in">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        </button>
-        <button class="zoom-btn reset-btn" onclick="resetZoom(true)" aria-label="Reset zoom" title="Reset zoom">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
-        </button>
-        <!-- The Fullscreen Button in zoom toolbar -->
-        <button class="zoom-btn" onclick="toggleFullscreen(event)" aria-label="Full screen image" title="Only make image full screen">
-          <svg class="fs-icon-enter-zoom" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-          </svg>
-          <svg class="fs-icon-exit-zoom" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
-          </svg>
-        </button>
+      <!-- BOTTOM BAR: ID badge + Price -->
+      <div class="modal-bottom-bar">
+        <div class="modal-id-badge" id="modalIdBadge">
+          <span class="modal-id-number" id="modalIdNumber">#1</span>
+          <span class="modal-id-label" id="modalIdLabel">Face Paint</span>
+        </div>
+        <span class="modal-price-tag hidden" id="modalPriceTag">&#8377;--</span>
       </div>
 
-      <div class="modal-tap-dismiss-tip">Pinch or double-tap to zoom • Drag to pan</div>
     </div>
   </div>
 
-  <footer>
-    <p>Tech Fest Design Menu • Hosted on GitHub Pages</p>
+  <!-- Floating Bottom Navigation Dock -->
+  <nav class="tabs-container" id="bottomDock" aria-label="Category Selection">
+    <div class="tabs-wrapper">
+      <button class="tab-btn active" id="tabFacePaint" onclick="switchCategory('facePaint')">
+        <span class="tab-icon">🎭</span>
+        <span>Face Paint</span>
+      </button>
+      <button class="tab-btn" id="tabMehendi" onclick="switchCategory('mehendi')">
+        <span class="tab-icon">✨</span>
+        <span>Mehendi</span>
+      </button>
+    </div>
+  </nav>
+
+
+  
+<footer>
+    <p>Tech Fest Design Menu &bull; Hosted on GitHub Pages</p>
   </footer>
 
   <!-- Images list -->
   <script src="gallery-data.js"></script>
-
+  <script src="prices-data.js"></script>
   <script>
+    // Fallback prices in case prices-data.js is blocked or not loaded
+    window.PRICE_MAP = window.PRICE_MAP || {
+      "f1": 30,
+      "m2": 40
+    };
+
+    async function loadPrices() {
+      // Skip fetch on file:/// protocol to avoid browser CORS errors
+      if (window.location.protocol === 'file:') {
+        return;
+      }
+      try {
+        const res = await fetch('prices.json');
+        if (res.ok) {
+          const data = await res.json();
+          const flat = {};
+          for (const key in data) {
+            const val = data[key];
+            if (val && typeof val === 'object') {
+              for (const subKey in val) {
+                if (val[subKey] !== null && val[subKey] !== undefined && val[subKey] !== '') {
+                  flat[subKey.toLowerCase()] = val[subKey];
+                }
+              }
+            } else if (val !== null && val !== undefined && val !== '') {
+              flat[key.toLowerCase()] = val;
+            }
+          }
+          window.PRICE_MAP = Object.assign({}, window.PRICE_MAP, flat);
+          renderGallery();
+        }
+      } catch (e) {
+        // Fetch might be blocked in local file:// protocol; prices-data.js serves as source
+      }
+    }
+
+    function getPrice(category, id) {
+      try {
+        const map = window.PRICE_MAP || {};
+        const prefix = category === 'facePaint' ? 'f' : 'm';
+        const key = (prefix + id).toLowerCase();
+        const val = map[key];
+        return (val !== null && val !== undefined && val !== '') ? val : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
     let currentCategory = 'facePaint';
     let searchQuery = '';
 
     function init() {
-      if (typeof GALLERY_IMAGES === 'undefined') {
+      if (typeof GALLERY_IMAGES === 'undefined' && typeof window.GALLERY_IMAGES === 'undefined') {
         console.error("GALLERY_IMAGES not defined. Check gallery-data.js.");
         return;
       }
       renderGallery();
+      loadPrices();
     }
 
     function handleSearch(val) {
@@ -1186,7 +1317,8 @@
     function renderGallery() {
       const grid = document.getElementById('galleryGrid');
       const folderName = currentCategory === 'facePaint' ? 'face paint' : 'mehendi';
-      const fileList = GALLERY_IMAGES[currentCategory] || [];
+      const galleryData = window.GALLERY_IMAGES || (typeof GALLERY_IMAGES !== 'undefined' ? GALLERY_IMAGES : {});
+      const fileList = galleryData[currentCategory] || [];
 
       // Map each image to a simple 1-based unique design ID (#1, #2, #3...)
       const allItems = fileList.map((fileName, idx) => ({
@@ -1210,7 +1342,7 @@
         const otherCategory = currentCategory === 'facePaint' ? 'mehendi' : 'facePaint';
         const otherName = currentCategory === 'facePaint' ? 'Mehendi' : 'Face Paint';
         const currentName = currentCategory === 'facePaint' ? 'Face Paint' : 'Mehendi';
-        const otherFileList = GALLERY_IMAGES[otherCategory] || [];
+        const otherFileList = galleryData[otherCategory] || [];
         const matchesInOther = otherFileList.map((fn, idx) => ({ id: idx + 1, fileName: fn }))
           .filter(item => {
             const idStr = String(item.id);
@@ -1247,10 +1379,13 @@
       grid.innerHTML = cols.map(columnItems => {
         const cardsHtml = columnItems.map(item => {
           const encodedSrc = `${encodeURIComponent(folderName)}/${encodeURIComponent(item.fileName)}`;
+          const price = getPrice(currentCategory, item.id);
+          const priceBadge = price !== null ? `<span class="pin-price-badge">&#8377;${price}</span>` : '';
           return `
             <div class="pin-card is-loading" onclick="openModal('${encodedSrc}', ${item.id}, '${currentCategory}')" role="button" tabindex="0" aria-label="View design #${item.id}">
               <div class="pin-skeleton" aria-hidden="true"></div>
               <div class="pin-id-badge" aria-label="Design #${item.id}">#${item.id}</div>
+              ${priceBadge}
               <img src="${encodedSrc}" alt="Design #${item.id}" loading="lazy" onload="handleImageLoaded(this)" onerror="handleImageError(this)">
             </div>
           `;
@@ -1366,6 +1501,16 @@
 
       if (idNumEl) idNumEl.innerText = idNumber != null ? `#${idNumber}` : '';
       if (idLabelEl) idLabelEl.innerText = category === 'facePaint' ? 'Face Paint' : 'Mehendi';
+      const modalPriceTag = document.getElementById('modalPriceTag');
+      if (modalPriceTag) {
+        const p = getPrice(category, idNumber);
+        if (p !== null) {
+          modalPriceTag.innerHTML = '&#8377;' + p;
+          modalPriceTag.classList.remove('hidden');
+        } else {
+          modalPriceTag.classList.add('hidden');
+        }
+      }
 
       // Set popup to skeleton grey loading state + active spinning indicator with dots
       container.classList.add('is-loading');
