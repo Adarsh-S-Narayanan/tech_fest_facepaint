@@ -79,7 +79,8 @@ window.GALLERY_IMAGES = {
                       "WhatsApp Image 2026-10-29 at 11.29.32 AM (1).jpeg",
                       "WhatsApp Image 2026-10-29 at 11.29.32 AM (2).jpeg",
                       "WhatsApp Image 2026-10-29 at 11.29.32 AM.jpeg",
-                      "WhatsApp Image 2026-10-29 at 11.29.33 AM.jpeg"
+                      "WhatsApp Image 2026-10-29 at 11.29.33 AM.jpeg",
+                      "WhatsApp Image 2026-10-29 at 3.55.21 PM.jpeg"
                   ],
     "mehendi":  [
                     "WhatsApp Image 2026-10-27 at 7.24.32 PM (1).jpeg",
@@ -102,7 +103,15 @@ window.GALLERY_IMAGES = {
                     "WhatsApp Image 2026-10-28 at 8.08.15 PM.jpeg",
                     "WhatsApp Image 2026-10-29 at 3.32.40 PM (1).jpeg",
                     "WhatsApp Image 2026-10-29 at 3.32.40 PM.jpeg",
-                    "WhatsApp Image 2026-10-29 at 3.32.41 PM.jpeg"
+                    "WhatsApp Image 2026-10-29 at 3.32.41 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.54.45 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.54.46 PM (1).jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.54.46 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.55.21 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.55.22 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.56.02 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.56.34 PM.jpeg",
+                    "WhatsApp Image 2026-10-29 at 3.56.38 PM.jpeg"
                 ]
 };
 var GALLERY_IMAGES = window.GALLERY_IMAGES;

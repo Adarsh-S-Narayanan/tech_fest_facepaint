@@ -79,7 +79,8 @@ window.PRICES_DATA = {
     "f76": null,
     "f77": null,
     "f78": null,
-    "f79": null
+    "f79": null,
+    "f80": null
   },
   "mehendi": {
     "m1": null,
@@ -102,7 +103,15 @@ window.PRICES_DATA = {
     "m18": null,
     "m19": null,
     "m20": null,
-    "m21": null
+    "m21": null,
+    "m22": null,
+    "m23": null,
+    "m24": null,
+    "m25": null,
+    "m26": null,
+    "m27": null,
+    "m28": null,
+    "m29": null
   }
 };
 window.PRICE_MAP = {
