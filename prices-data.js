@@ -109,9 +109,7 @@ window.PRICES_DATA = {
     "m24": null,
     "m25": null,
     "m26": null,
-    "m27": null,
-    "m28": null,
-    "m29": null
+    "m27": null
   }
 };
 window.PRICE_MAP = {
