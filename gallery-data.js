@@ -80,7 +80,10 @@ window.GALLERY_IMAGES = {
                       "WhatsApp Image 2026-10-29 at 11.29.32 AM (2).jpeg",
                       "WhatsApp Image 2026-10-29 at 11.29.32 AM.jpeg",
                       "WhatsApp Image 2026-10-29 at 11.29.33 AM.jpeg",
-                      "WhatsApp Image 2026-10-29 at 3.55.21 PM.jpeg"
+                      "WhatsApp Image 2026-10-29 at 3.55.21 PM.jpeg",
+                      "WhatsApp Image 2026-10-30 at 8.42.14 PM.jpeg",
+                      "WhatsApp Image 2026-10-30 at 8.42.15 PM (1).jpeg",
+                      "WhatsApp Image 2026-10-30 at 8.42.15 PM.jpeg"
                   ],
     "mehendi":  [
                     "WhatsApp Image 2026-10-27 at 7.24.32 PM (1).jpeg",
